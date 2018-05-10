@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import Day from './day';
 import { connect } from 'react-redux';
+import { updateMonthYear } from '../actions/index';
 
 class Days extends Component {
+    constructor(props) {
+        super(props);
+        this.onDateChange = this.onDateChange.bind(this);
+    }
     renderDay(year, month) {
         /* firstDate is the first day of the month
         ** firstCalendarDate is the first day of the calendar need to display
@@ -23,7 +28,7 @@ class Days extends Component {
         let dates = [];
         while (start <= end) {
             const type=this.dateType(start.getDate(), key, start.getDay());
-            dates.push(<Day key={key} date={_.clone(start)} type={type}></Day>);
+            dates.push(<Day key={key} date={_.clone(start)} type={type} onDateChange={this.onDateChange}></Day>);
             key++;
             start.setDate(start.getDate() + 1);
         }
@@ -56,11 +61,18 @@ class Days extends Component {
        return lastDate;
     }
 
+    // this event receive the date of the component and dispatch
+    // update date
+    onDateChange(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        this.props.updateMonthYear(year, month);
+    }
+
     render() {
       const { year, month } = this.props;
-      console.log('days component', year, month);
       return(
-          <div className="calendar">
+          <div className="calendar" >
             {this.renderDay(year, month)}
           </div>
       );
@@ -73,4 +85,4 @@ function mapStateToProps(state){
         year: state.time.year
     }
 }
-export default connect(mapStateToProps)(Days);
+export default connect(mapStateToProps, { updateMonthYear })(Days);

@@ -42,9 +42,9 @@ class Navigation extends Component {
         return(
           <div className="navigation">
             <div>
-            <button className="nav-btn" onClick={this.handleDecrement}> {"<"} </button>
-            <span className="navigation-info">{months[month]} {year}</span>
-            <button className="nav-btn" onClick={this.handleIncrement}> {">"} </button>
+            <button className="" onClick={this.handleDecrement}> {"<"} </button>
+            <button className="navigation-info">{months[month]} {year}</button>
+            <button className="" onClick={this.handleIncrement}> {">"} </button>
             </div>
           </div>
         )

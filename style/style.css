@@ -20,6 +20,7 @@
 .navigation-info {
     display: inline-block;
     width: 10em;
+    font-weight: bold;
 }
 .nav-btn {
     display: inline-block;

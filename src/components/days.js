@@ -61,7 +61,7 @@ class Days extends Component {
       console.log('days component', year, month);
       return(
           <div className="calendar">
-            {this.renderDay(2018,4)}
+            {this.renderDay(year, month)}
           </div>
       );
     }

@@ -1,26 +1,6 @@
 #calendar {
     width: 21em;
 }
-button {
-    background-color: whitesmoke;
-    border-style: none;
-}
-button:focus {
-    background-color: rgb(128, 176, 252);
-    border: 0;
-    outline: none;
-    color: white;
-}
-.calendar {
-    width: 21em;
-}
-.day-render {
-    display: inline-block;
-    padding: .2em;
-    text-align: center;
-    width: 3em;
-}
-
 
 /* day type rule */
 .day-name {
@@ -37,3 +17,33 @@ button:focus {
 .navigation {
     text-align: center;
 }
+.navigation-info {
+    display: inline-block;
+    width: 10em;
+}
+.nav-btn {
+    display: inline-block;
+}
+button {
+    background-color: whitesmoke;
+    border-style: none;
+}
+
+button:focus {
+    background-color: rgb(128, 176, 252);
+    border: 0;
+    outline: none;
+    color: white !important;
+}
+
+.calendar {
+    width: 21em;
+}
+.day-render {
+    display: inline-block;
+    padding: .2em;
+    text-align: center;
+    width: 3em;
+}
+
+

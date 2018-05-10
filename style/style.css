@@ -1,0 +1,39 @@
+#calendar {
+    width: 21em;
+}
+button {
+    background-color: whitesmoke;
+    border-style: none;
+}
+button:focus {
+    background-color: rgb(128, 176, 252);
+    border: 0;
+    outline: none;
+    color: white;
+}
+.calendar {
+    width: 21em;
+}
+.day-render {
+    display: inline-block;
+    padding: .2em;
+    text-align: center;
+    width: 3em;
+}
+
+
+/* day type rule */
+.day-name {
+    font-weight: bold;
+}
+
+.not-belong {
+    color: lightgray;
+}
+.weekend {
+    color: rgb(255, 49, 45);
+}
+
+.navigation {
+    text-align: center;
+}

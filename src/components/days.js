@@ -9,6 +9,7 @@ class Days extends Component {
         super(props);
         this.onDateChange = this.onDateChange.bind(this);
     }
+
     renderDay(year, month) {
         /* firstDate is the first day of the month
         ** firstCalendarDate is the first day of the calendar need to display
@@ -23,21 +24,36 @@ class Days extends Component {
         return dates;
     }
 
+    // get the start date of the calendar and the end date of the calendar to iterate through and render all
+    // start and end are date objects
     calendarDate(start, end) {
-        let key = 0;
+        // id format will be MMDD
+        let id;
+        let index = 0;
         let dates = [];
+        const currentMonth = this.props.month;
+        const currentDate = this.props.currentDate;
+        const today = new Date(currentDate.year, currentDate.month, currentDate.date);
         while (start <= end) {
-            const type=this.dateType(start.getDate(), key, start.getDay());
-            dates.push(<Day key={key} date={_.clone(start)} type={type} onDateChange={this.onDateChange}></Day>);
-            key++;
+            id = start.getMonth()+ '' + start.getDate();
+            const type = this.dateType(start.getMonth(), currentMonth, start.getDay());
+
+            // this to determine is this date is today to pass it the today type
+            if (today.getTime() === start.getTime()) {
+                const today = 'today';
+                dates.push(<Day key={id} date={_.clone(start)} type={{type, today}} onDateChange={this.onDateChange}></Day>);
+            } else {
+                dates.push(<Day key={id} date={_.clone(start)} type={{type}} onDateChange={this.onDateChange}></Day>);
+            }
+            index++;
             start.setDate(start.getDate() + 1);
         }
         return dates;
     }
 
-    // determine if this is the date of 
-    dateType(date, index, day) {
-        if (index < 7 && date > 20  || index > 20 && date < 7 ) {
+    // determine if this is the date belong to this month or weekend or regular day
+    dateType(month, currentMonth, day) {
+        if (month !== currentMonth) {
             return 'not-belong';
         } if (day === 5 || day === 6) {
             return 'weekend';
@@ -79,10 +95,12 @@ class Days extends Component {
     }
 }
 
+// Days keeps the current month, year, and date
 function mapStateToProps(state){
     return {
         month: state.time.month,
-        year: state.time.year
+        year: state.time.year,
+        currentDate: state.today
     }
 }
 export default connect(mapStateToProps, { updateMonthYear })(Days);

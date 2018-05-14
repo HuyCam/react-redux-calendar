@@ -8,10 +8,15 @@
 }
 
 .not-belong {
-    color: lightgray;
+    color: rgb(243, 243, 243);
 }
 .weekend {
     color: rgb(255, 49, 45);
+}
+
+
+.today {
+    background-color: rgb(117, 216, 255);
 }
 
 .navigation {
@@ -26,25 +31,28 @@
     display: inline-block;
 }
 button {
-    background-color: whitesmoke;
-    border-style: none;
+    background-color: rgb(219, 219, 219);
+    border: none;
 }
 
-button:focus {
-    background-color: rgb(128, 176, 252);
-    border: 0;
-    outline: none;
-    color: white !important;
-}
 
 .calendar {
     width: 21em;
 }
+
 .day-render {
     display: inline-block;
     padding: .2em;
     text-align: center;
     width: 3em;
+    margin-top: .1em;
+    box-sizing: border-box;
+}
+
+.day-render:focus {
+    border: 2px solid blueviolet;
+    outline: none;
+    color: white !important;
 }
 
 

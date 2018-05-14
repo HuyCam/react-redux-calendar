@@ -29,7 +29,6 @@ class Days extends Component {
     calendarDate(start, end) {
         // id format will be MMDD
         let id;
-        let index = 0;
         let dates = [];
         const currentMonth = this.props.month;
         const currentDate = this.props.currentDate;
@@ -45,7 +44,6 @@ class Days extends Component {
             } else {
                 dates.push(<Day key={id} date={_.clone(start)} type={{type}} onDateChange={this.onDateChange}></Day>);
             }
-            index++;
             start.setDate(start.getDate() + 1);
         }
         return dates;
@@ -85,15 +83,28 @@ class Days extends Component {
         this.props.updateMonthYear(year, month);
     }
 
+    // rendering names of the days in a week
+    renderDayName() {
+        const days = ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        return days.map((day) => <div className="day-render day-name" key={day}>{day}</div>);
+    }
+
     render() {
+      // if display mode is false then don't display days
+      if (!this.props.displayOption) {
+          return null;
+      }
       const { year, month } = this.props;
       return(
           <div className="calendar" >
+            {this.renderDayName()}
             {this.renderDay(year, month)}
           </div>
       );
     }
 }
+
+
 
 // Days keeps the current month, year, and date
 function mapStateToProps(state){

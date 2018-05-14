@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateMonthYear } from '../actions/index';
+import { updateMonthYear, toggleMode } from '../actions/index';
+import { MONTHS_MODE, DAYS_MODE} from '../actions/index';
 
 class Navigation extends Component {
     constructor(props) {
@@ -8,6 +9,7 @@ class Navigation extends Component {
 
         this.handleIncrement = this.handleIncrement.bind(this);
         this.handleDecrement = this.handleDecrement.bind(this);
+        this.handleMode = this.handleMode.bind(this);
     }
 
     handleIncrement() {
@@ -36,6 +38,20 @@ class Navigation extends Component {
         }
     }
 
+    handleMode() {
+        
+        const mode = this.props.mode;
+        console.log('navigation ', mode);
+        switch (mode) {
+            case MONTHS_MODE:
+              this.props.toggleMode(DAYS_MODE);
+              break;
+            case DAYS_MODE:
+              this.props.toggleMode(MONTHS_MODE);
+              break;
+        }
+    }
+
     render() {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const { month, year } = this.props;
@@ -43,7 +59,7 @@ class Navigation extends Component {
           <div className="navigation">
             <div>
             <button className="" onClick={this.handleDecrement}> {"<"} </button>
-            <button className="navigation-info">{months[month]} {year}</button>
+            <button className="navigation-info" onClick={this.handleMode}>{months[month]} {year}</button>
             <button className="" onClick={this.handleIncrement}> {">"} </button>
             </div>
           </div>
@@ -54,7 +70,8 @@ class Navigation extends Component {
 function mapStateToProps(state) {
     return {
         month: state.time.month,
-        year: state.time.year
+        year: state.time.year,
+        mode: state.mode
     }
 }
-export default connect(mapStateToProps, { updateMonthYear })(Navigation);
+export default connect(mapStateToProps, { updateMonthYear, toggleMode  })(Navigation);

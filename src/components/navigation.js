@@ -9,43 +9,62 @@ class Navigation extends Component {
 
         this.handleIncrement = this.handleIncrement.bind(this);
         this.handleDecrement = this.handleDecrement.bind(this);
-        this.handleMode = this.handleMode.bind(this);
+        this.handleChangeMode = this.handleChangeMode.bind(this);
     }
 
     handleIncrement() {
-        // increase month by one
+        
         let { month, year } = this.props;
-        if (month === 11) {
-            year++;
-            month = 0;
-            this.props.updateMonthYear(year, month);
-        } else {
-            month++;
-            this.props.updateMonthYear(year, month);
+        switch(this.props.mode) {
+            case DAYS_MODE:
+            // increase month by one
+                if (month === 11) {
+                    year++;
+                    month = 0;
+                    this.props.updateMonthYear(year, month);
+                } else {
+                    month++;
+                    this.props.updateMonthYear(year, month);
+                }
+                break;
+            case MONTHS_MODE:
+            // increase year by one
+                year++;
+                this.props.updateMonthYear(year, undefined);
+                break;
         }
+        
     }
 
     handleDecrement() {
-        // decrease month by one
         let { month, year } = this.props;
-        if (month === 0) {
-            year--;
-            month = 11;
-            this.props.updateMonthYear(year, month);
-        } else {
-            month--;
-            this.props.updateMonthYear(year, month);
+        switch(this.props.mode) {
+            case DAYS_MODE:
+                // decrease month by one
+                if (month === 0) {
+                    year--;
+                    month = 11;
+                    this.props.updateMonthYear(year, month);
+                } else {
+                // decrease year by one;
+                    month--;
+                    this.props.updateMonthYear(year, month);
+                }
+                break;
+            case MONTHS_MODE:
+                year--;
+                this.props.updateMonthYear(year, undefined);
+                break;
         }
     }
 
-    handleMode() {
-        
+    handleChangeMode() {
         const mode = this.props.mode;
         console.log('navigation ', mode);
         switch (mode) {
-            case MONTHS_MODE:
-              this.props.toggleMode(DAYS_MODE);
-              break;
+            // case MONTHS_MODE:
+            //   this.props.toggleMode(DAYS_MODE);
+            //   break;
             case DAYS_MODE:
               this.props.toggleMode(MONTHS_MODE);
               break;
@@ -59,7 +78,7 @@ class Navigation extends Component {
           <div className="navigation">
             <div>
             <button className="" onClick={this.handleDecrement}> {"<"} </button>
-            <button className="navigation-info" onClick={this.handleMode}>{months[month]} {year}</button>
+            <button className="navigation-info" onClick={this.handleChangeMode}>{this.props.mode === 'DAYS' ? months[month] : null} {year}</button>
             <button className="" onClick={this.handleIncrement}> {">"} </button>
             </div>
           </div>

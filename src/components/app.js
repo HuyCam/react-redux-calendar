@@ -4,6 +4,9 @@ import { updateMonthYear, updateToday, toggleMode } from '../actions/index';
 import { MONTHS_MODE, DAYS_MODE} from '../actions/index';
 import { connect } from 'react-redux';
 
+// testing purpose
+import StoreChecking from './storeTracking';
+//end testing
 class App extends Component {
   componentDidMount() {
     const today = new Date();
@@ -16,6 +19,7 @@ class App extends Component {
     return (
       <div>
         <Calendar />
+        <StoreChecking />
       </div>
     );
   }

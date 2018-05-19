@@ -55,4 +55,10 @@ button {
     color: white !important;
 }
 
-
+/* months style */
+.month-render {
+    padding: .2em;
+    width: 5.25em;
+    text-align: center;
+    margin-top: .1em;
+}

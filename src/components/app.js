@@ -3,6 +3,7 @@ import Calendar from './calendar';
 import { updateMonthYear, updateToday, toggleMode } from '../actions/index';
 import { MONTHS_MODE, DAYS_MODE} from '../actions/index';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // testing purpose
 import StoreChecking from './storeTracking';
@@ -19,11 +20,14 @@ class App extends Component {
     return (
       <div className="row">
         <div className="col-md-4">
-        <Calendar />
+          <Calendar />
+          <Link className="btn btn-primary" to="/reminder/add">
+            Add Reminder
+          </Link>
         </div>
         <div className="col-md-8">
-        <div id="reminder" >Reminder</div>
-        <StoreChecking />
+          <div id="reminder" >Reminder</div>
+          <StoreChecking />
         </div>
         
       </div>

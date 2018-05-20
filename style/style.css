@@ -35,6 +35,10 @@ button {
     border: none;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 
 .calendar {
     width: 21em;

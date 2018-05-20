@@ -17,9 +17,15 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
+        <div className="col-md-4">
         <Calendar />
+        </div>
+        <div className="col-md-8">
+        <div id="reminder" >Reminder</div>
         <StoreChecking />
+        </div>
+        
       </div>
     );
   }

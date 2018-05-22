@@ -24,7 +24,7 @@
 }
 .navigation-info {
     display: inline-block;
-    width: 10em;
+    width: 50%;
     font-weight: bold;
 }
 .nav-btn {
@@ -41,14 +41,14 @@ button:hover {
 
 
 .calendar {
-    width: 21em;
+    width: 100%;
 }
 
 .day-render {
     display: inline-block;
     padding: .2em;
     text-align: center;
-    width: 3em;
+    width: 14.285%;
     margin-top: .1em;
     box-sizing: border-box;
 }

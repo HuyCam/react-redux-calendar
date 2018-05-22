@@ -18,18 +18,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-4">
-          <Calendar />
-          <Link className="btn btn-primary" to="/reminder/add">
-            Add Reminder
-          </Link>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <Calendar />
+            <Link className="btn btn-primary" to="/reminder/add">
+              Add Reminder
+            </Link>
+          </div>
+          <div className="col-md-6">
+            <div id="reminder" >Reminder</div>
+            <StoreChecking />
+          </div>
         </div>
-        <div className="col-md-8">
-          <div id="reminder" >Reminder</div>
-          <StoreChecking />
-        </div>
-        
       </div>
     );
   }

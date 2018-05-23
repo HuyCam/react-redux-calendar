@@ -1,4 +1,4 @@
-import { UPDATE_MONTH_YEAR, TODAY } from '../actions/index.js';
+import { UPDATE_MONTH_YEAR, TODAY, SELECTED_DATE } from '../actions/index.js';
 
 export function updateNavigation(state = {}, action) {
     switch(action.type) {
@@ -14,6 +14,15 @@ export function getToday(state = {}, action) {
     case TODAY:
       return action.payload;
     default: 
+      return state;
+  }
+}
+
+export function selectDate(state = {}, action) {
+  switch(action.type) {
+    case SELECTED_DATE:
+      return action.payload;
+    default:
       return state;
   }
 }

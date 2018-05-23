@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import Promise from 'redux-promise';
 
+// local components
 import App from './components/app';
 import reducers from './reducers';
 
@@ -10,7 +12,7 @@ import reducers from './reducers';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AddReminder from './components/addReminder';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const createStoreWithMiddleware = applyMiddleware(Promise)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>

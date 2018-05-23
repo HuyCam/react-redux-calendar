@@ -60,7 +60,6 @@ class Navigation extends Component {
 
     handleChangeMode() {
         const mode = this.props.mode;
-        console.log('navigation ', mode);
         switch (mode) {
             // case MONTHS_MODE:
             //   this.props.toggleMode(DAYS_MODE);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from './calendar';
-import { updateMonthYear, updateToday, toggleMode } from '../actions/index';
+import Notes from './notes-reminder';
+import { updateMonthYear, updateToday, toggleMode, fetchNotes, selectedDate } from '../actions/index';
 import { MONTHS_MODE, DAYS_MODE} from '../actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -13,7 +14,15 @@ class App extends Component {
     const today = new Date();
     this.props.updateMonthYear(today.getFullYear(), today.getMonth());
     this.props.updateToday(today.getFullYear(), today.getMonth(), today.getDate());
+
+    // first of when start the app, toggle day mode to view days instead of months
     this.props.toggleMode(DAYS_MODE);
+
+    // fetch all notes reminder
+    this.props.fetchNotes();
+
+    // automatic selected date is today
+    this.props.selectedDate(today.getFullYear(), today.getMonth(), today.getDate())
   }
 
   render() {
@@ -27,7 +36,7 @@ class App extends Component {
             </Link>
           </div>
           <div className="col-md-6">
-            <div id="reminder" >Reminder</div>
+            <Notes />
             <StoreChecking />
           </div>
         </div>
@@ -36,4 +45,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, { updateMonthYear, updateToday, toggleMode })(App);
+export default connect(null, { updateMonthYear, updateToday, toggleMode, fetchNotes, selectedDate })(App);

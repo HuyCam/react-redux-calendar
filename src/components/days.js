@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import Day from './day';
 import { connect } from 'react-redux';
-import { updateMonthYear } from '../actions/index';
+import { updateMonthYear, selectedDate } from '../actions/index';
 
 class Days extends Component {
     constructor(props) {
         super(props);
         this.onDateChange = this.onDateChange.bind(this);
+        this.handleSelectedDate = this.handleSelectedDate.bind(this);
     }
 
     renderDay(year, month) {
@@ -40,9 +41,19 @@ class Days extends Component {
             // this to determine is this date is today to pass it the today type
             if (today.getTime() === start.getTime()) {
                 const today = 'today';
-                dates.push(<Day key={id} date={_.clone(start)} type={{type, today}} onDateChange={this.onDateChange}></Day>);
+                const autofocus = true;
+                dates.push(
+                  <Day 
+                    key={id} 
+                    date={_.clone(start)} 
+                    type={{type, today}} 
+                    autofocus={autofocus} 
+                    onDateChange={this.onDateChange} 
+                    handleSelectedDate={this.handleSelectedDate}
+                    >
+                  </Day>);
             } else {
-                dates.push(<Day key={id} date={_.clone(start)} type={{type}} onDateChange={this.onDateChange}></Day>);
+                dates.push(<Day key={id} date={_.clone(start)} type={{type}} onDateChange={this.onDateChange} handleSelectedDate={this.handleSelectedDate}></Day>);
             }
             start.setDate(start.getDate() + 1);
         }
@@ -83,6 +94,14 @@ class Days extends Component {
         this.props.updateMonthYear(year, month);
     }
 
+    // date should be an object
+    handleSelectedDate(dateObj) {
+        console.log('handle selected date fire');
+        
+        const { year, month, date } = dateObj
+        this.props.selectedDate(year, month, date);
+    }
+
     // rendering names of the days in a week
     renderDayName() {
         const days = ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -114,4 +133,4 @@ function mapStateToProps(state){
         currentDate: state.today
     }
 }
-export default connect(mapStateToProps, { updateMonthYear })(Days);
+export default connect(mapStateToProps, { updateMonthYear, selectedDate })(Days);

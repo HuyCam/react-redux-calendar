@@ -66,3 +66,20 @@ button:hover {
     text-align: center;
     margin-top: .1em;
 }
+
+/* Notes style */
+.note-container {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0;
+    margin-top: 0.5em;
+}
+.note-title, .note-body {
+    padding-left: 10%;
+}
+.note-title {
+    border-bottom: 1px solid black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: rgb(162, 195, 249);
+}

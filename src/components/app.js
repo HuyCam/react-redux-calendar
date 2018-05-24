@@ -13,7 +13,7 @@ class App extends Component {
   componentDidMount() {
     const today = new Date();
     this.props.updateMonthYear(today.getFullYear(), today.getMonth());
-    this.props.updateToday(today.getFullYear(), today.getMonth(), today.getDate());
+    this.props.updateToday(today.toDateString());
 
     // first of when start the app, toggle day mode to view days instead of months
     this.props.toggleMode(DAYS_MODE);
@@ -22,7 +22,7 @@ class App extends Component {
     this.props.fetchNotes();
 
     // automatic selected date is today
-    this.props.selectedDate(today.getFullYear(), today.getMonth(), today.getDate())
+    this.props.selectedDate(today.toDateString());
   }
 
   render() {

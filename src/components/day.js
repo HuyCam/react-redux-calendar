@@ -12,12 +12,7 @@ const Day = (props) => {
   };
   
   const handleClick = () => {
-    const dateObj = {
-      year: props.date.getFullYear(),
-      month: props.date.getMonth(),
-      date: props.date.getDate()
-    };
-    props.handleSelectedDate(dateObj);
+    props.handleSelectedDate(props.date.toDateString());
     onDateChange();
   };
 
@@ -32,7 +27,6 @@ const Day = (props) => {
       </time>
     </button>
   );
-
 }
 
 export default Day;

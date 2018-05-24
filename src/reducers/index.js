@@ -6,7 +6,7 @@ import { getNotes } from './notes';
 
 const rootReducer = combineReducers({
   time: updateNavigation,
-  today: getToday,
+  today: getToday,          // this is now a date in string
   mode: toggleMode,
   form: formReducer,
   notes: getNotes,

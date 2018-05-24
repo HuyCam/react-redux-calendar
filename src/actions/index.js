@@ -5,6 +5,7 @@ export const TODAY = 'TODAY';
 export const TOGGLE_MODE = 'TOGGLE_MODE';
 export const GET_NOTES = 'GET_NOTES';
 export const SELECTED_DATE = 'SELECTED_DATE';
+export const POST_NOTE = 'POST_NOTE';
 
 // display mode
 export const MONTHS_MODE = 'MONTHS';
@@ -17,10 +18,10 @@ export function updateMonthYear(year, month) {
     }
 }
 
-export function updateToday(year, month, date) {
+export function updateToday(dateString) {
     return {
         type: TODAY,
-        payload: { year, month , date}
+        payload: dateString
     }
 }
 
@@ -40,14 +41,18 @@ export function fetchNotes() {
     }
 }
 
-export function selectedDate(year, month, date) {
+export function postNote(value, navigateBack) {
+    const request = axios.post('https://mighty-wave-94852.herokuapp.com/notes', value).then(() => navigateBack());
+    return {
+        type: POST_NOTE,
+        payload: request
+    }
+}
+
+export function selectedDate(dateString) {
     // date should be just a object like today { year, month , date}
     return {
         type: SELECTED_DATE,
-        payload: {
-            year,
-            month,
-            date
-        }
+        payload: dateString
     };
 }

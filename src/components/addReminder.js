@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+
+import {postNote} from '../actions/index';
 
 class AddReminder extends Component {
     renderField(field) {
@@ -15,9 +18,22 @@ class AddReminder extends Component {
         );
     }
 
+    onSubmit(value) {
+        const {date} = value;
+        const [year, month, aDate] = date.split('-');
+        const newDate = month + '-' + aDate + '-0' + year;
+        value.date = newDate;
+        console.log(value);
+        this.props.postNote(value, () => {
+            this.props.history.push('/');
+        });
+    }
+
     render() {
+        const { handleSubmit } = this.props;
+        
         return (
-            <form>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field 
                     label="Date"
                     name="date"
@@ -31,7 +47,7 @@ class AddReminder extends Component {
                 />
                 <Field
                     label="Note"
-                    name="note"
+                    name="body"
                     component={this.renderField}
                 />
                 <button type="submit" className="btn btn-primary">Submit</button>
@@ -59,4 +75,6 @@ function validate(values) {
 export default reduxForm({
     validate,
     form: 'NewNoteForm'
-})(AddReminder);
+})(
+    connect(null, { postNote })(AddReminder)
+);

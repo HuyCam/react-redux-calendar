@@ -33,7 +33,7 @@ class Days extends Component {
         let dates = [];
         const currentMonth = this.props.month;
         const currentDate = this.props.currentDate;
-        const today = new Date(currentDate.year, currentDate.month, currentDate.date);
+        const today = new Date(currentDate);
         while (start <= end) {
             id = start.getMonth()+ '' + start.getDate();
             const type = this.dateType(start.getMonth(), currentMonth, start.getDay());
@@ -95,11 +95,9 @@ class Days extends Component {
     }
 
     // date should be an object
-    handleSelectedDate(dateObj) {
-        console.log('handle selected date fire');
-        
-        const { year, month, date } = dateObj
-        this.props.selectedDate(year, month, date);
+    handleSelectedDate(dateString) {
+        console.log('handle selected date fire');     
+        this.props.selectedDate(dateString);
     }
 
     // rendering names of the days in a week

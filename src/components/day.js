@@ -15,11 +15,11 @@ const Day = (props) => {
     props.handleSelectedDate(props.date.toDateString());
     onDateChange();
   };
-
+  const haveNote = (props.doesHaveNote && props.type.type !== 'not-belong') ? 'have-note' : '';
   return(
     <button 
-      className={`day-render ${props.type.type} 
-      ${today}`} onClick={handleClick} 
+      className={`day-render ${props.type.type} ${today} ${haveNote}`} 
+      onClick={handleClick} 
       autoFocus={props.autofocus} 
       >
       <time>

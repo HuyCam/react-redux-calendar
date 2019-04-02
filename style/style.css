@@ -83,3 +83,7 @@ button:hover {
     border-top-right-radius: 5px;
     background-color: rgb(162, 195, 249);
 }
+
+.have-note {
+    border-top: 2px solid red;
+}

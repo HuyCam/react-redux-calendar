@@ -6,35 +6,41 @@ import NoteComponent from './note-component';
 
 class Notes extends Component {
     renderNotes() {
-        const notes = this.props.reminder.map(note => {
-            return (
-                <NoteComponent key={note.title} note={note} />
-            );
-        });
-        if (notes.length === 0) {
-            return 'Nothing to show yet...';
+        const reminders = this.props.reminders;
+        if (!reminders || _.isEmpty(reminders)) {
+            return 'Data is loading...';
         }
-        return notes;
+
+        const notesCollection = _.find(reminders, (notes) => {
+            if (notes[0].date === this.props.selectedDate) {
+                return notes;
+            }
+        })
+        
+        if (notesCollection) {
+            const JSXnotes = notesCollection.map(note => {
+                return <NoteComponent key={note.title} note={note} />;
+            });
+            return JSXnotes;
+        } else {
+            return 'No thing to show yet'
+        }
+        
+        
     }
 
     render() {
-        console.log('notes reminder',this.props.reminder);
-        
         return(
             <div>
                 {this.renderNotes()}
             </div>
-        )
+        );
     }
 }
 
 function mapStateToProps(state) {
     return {
-        reminder: _.filter(state.notes, (note) => {
-            if (note.date === state.selectedDate) {
-                return note;
-            } 
-        }),
+        reminders: state.notes,
         selectedDate: state.selectedDate
     }
 }

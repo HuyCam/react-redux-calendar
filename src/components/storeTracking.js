@@ -10,7 +10,7 @@ class StoreChecking extends Component {
     render() {
         console.log(this.props.info);
         return (
-            <div>Something</div>
+            <div>This is on developement process</div>
         )
     }
 }

@@ -37,8 +37,9 @@ class Days extends Component {
         while (start <= end) {
             id = start.getMonth()+ '' + start.getDate();
             const type = this.dateType(start.getMonth(), currentMonth, start.getDay());
-
-            // this to determine is this date is today to pass it the today type
+            // const haveNote = this.doHaveNote(start.toDateString);
+            // console.log('havenote: ',this.doHaveNote);
+            const haveNote = this.doHaveNote(start.toDateString());
             if (today.getTime() === start.getTime()) {
                 const today = 'today';
                 const autofocus = true;
@@ -50,21 +51,39 @@ class Days extends Component {
                     autofocus={autofocus} 
                     onDateChange={this.onDateChange} 
                     handleSelectedDate={this.handleSelectedDate}
+                    doesHaveNote={haveNote}
                     >
                   </Day>);
             } else {
-                dates.push(<Day key={id} date={_.clone(start)} type={{type}} onDateChange={this.onDateChange} handleSelectedDate={this.handleSelectedDate}></Day>);
+                dates.push(
+                  <Day 
+                  key={id} 
+                  date={_.clone(start)} 
+                  type={{type}} 
+                  onDateChange={this.onDateChange} 
+                  handleSelectedDate={this.handleSelectedDate}
+                  doesHaveNote={haveNote}
+                  >
+                  </Day>);
             }
+
+            // in crease start one day
             start.setDate(start.getDate() + 1);
         }
         return dates;
     }
 
+    doHaveNote(dateString) {
+        if (this.props.notes && this.props.notes[dateString]) {
+            return  true;
+        }   
+        return false;
+    }
     // determine if this is the date belong to this month or weekend or regular day
     dateType(month, currentMonth, day) {
         if (month !== currentMonth) {
             return 'not-belong';
-        } if (day === 5 || day === 6) {
+        } if (day === 0 || day === 6) {
             return 'weekend';
         } else {
             return 'regular';
@@ -121,14 +140,15 @@ class Days extends Component {
     }
 }
 
-
+   
 
 // Days keeps the current month, year, and date
 function mapStateToProps(state){
     return {
         month: state.time.month,
         year: state.time.year,
-        currentDate: state.today
+        currentDate: state.today,
+        notes: state.notes
     }
 }
 export default connect(mapStateToProps, { updateMonthYear, selectedDate })(Days);
